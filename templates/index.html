@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Product Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Product Recommender</h1>
 
+        <form method="POST">
+            <input type="text" name="query" value="{{ query }}" placeholder="Enter product name or description" required>
+            <button type="submit">Recommend</button>
+            <button type="button" onclick="window.location.href='/'">Reset</button>
+        </form>
+
+        {% if category %}
+            <h3>Predicted Category: {{ category }}</h3>
+            <ul>
+            {% for item in results %}
+                <li><strong>{{ item.name }}</strong>: {{ item.description }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if accuracy %}
+            <p class="accuracy"><strong>Model Accuracy:</strong> {{ accuracy }}%</p>
+        {% endif %}
+    </div>
+</body>
+</html>
